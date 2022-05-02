@@ -4,10 +4,23 @@ def kmeans(matrix, args):
     '''
     from sklearn.cluster import KMeans
 
-    # DELETE THIS
-    print('\nTransposed Matrix:')
-    print(matrix)
-
     model = KMeans(n_clusters = args['n_clusters'])
 
-    return model.fit_predict(matrix)
+    prediction = model.fit_predict(matrix)
+
+    prediction_groups = set(prediction)
+
+    groups = {}
+
+    for pred_index, group in enumerate(prediction):
+        sample = matrix.index[pred_index]
+        try:
+            groups[group].append(sample)
+        except:
+            groups[group] = [sample]
+    
+    csv_str = ''
+    for values in groups.values():
+        csv_str += ','.join(values) + '\n'
+
+    return csv_str
