@@ -1,0 +1,128 @@
+:root{
+  font-family: 'Roboto', sans-serif;
+  --main-font-size : 16px;
+  font-size: var(--main-font-size);
+  --pizza-position-mode : absolute;
+  --pizza-size : 200px;
+  --pizza-margin : 35px;
+  --bg-color : #151A30;
+  --purple : #7B07F8;
+  --sc-bg-color : #222B45;
+  --th-bg-color : #313a55;
+  --main-text-color : #D0D8F9;
+  color: var(--main-text-color);
+}
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 20px;
+  width: 98%;
+  height: 100%;
+  background-color: var(--bg-color);
+}
+
+.screen{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-icon{
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.simple{
+  width: max-content;
+  height: 100%;
+  padding: 15px 0px;
+}
+
+.view-mode{
+  border: 2px solid #464C69;
+  color: #464C69;
+  padding: 4px 12px;
+  margin: calc(var(--main-font-size) * 0.5);
+  display: inline-block;
+  transition: ease-in 0.2s;
+}
+
+.view-mode:hover{
+  border: 2px solid #fff;
+  color: #fff;
+  transform: scale(1.2) perspective(1px);
+  cursor: pointer;
+}
+
+.view-mode-radio:checked + .view-mode{
+  color: #4FF71B;
+  border: 2px solid #4FF71B;
+}
+
+.content-flex{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+input[type="file"] {
+  display: none;
+}
+.file-button-label{
+  background-color: var(--bg-color);
+  cursor: pointer;
+  padding: 3px 12px;
+  border-radius: 4px;
+  border: 2px solid var(--main-text-color) ;
+  color: #fff;
+  box-shadow: inset 0 0 0 0 var(--bg-color);
+  transition: ease-out 0.5s;
+}
+.file-button-label:hover{
+  border: 2px solid var(--purple);
+  color: var(--bg-color);
+  box-shadow: inset 200px 0 0 0 var(--purple);
+}
+
+/* CARDS */
+
+.cards{
+  width: 95vw;
+  min-height: max-content;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.card{
+  background-color: red;
+  border-radius: .5rem;
+  min-width: 100px;
+  max-width: max-content;
+  min-height: max-content;
+}
+
+.card-header{
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-body{
+  text-align: left;
+  padding: 0 1rem 1rem 1rem;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
