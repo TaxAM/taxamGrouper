@@ -98,5 +98,3 @@ if not exists(OUTPUT_FOLDER_PATH + args['output_name']):
     print(OUTPUT_FOLDER_PATH + args['output_name'] + ' was saved.')
 else:
     exit(OUTPUT_FOLDER_PATH + args['output_name'] + ' already exists.')
-
-# [] Store variable "groups" in a csv file

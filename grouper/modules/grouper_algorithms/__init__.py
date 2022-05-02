@@ -8,8 +8,6 @@ def kmeans(matrix, args):
 
     prediction = model.fit_predict(matrix)
 
-    prediction_groups = set(prediction)
-
     groups = {}
 
     for pred_index, group in enumerate(prediction):
