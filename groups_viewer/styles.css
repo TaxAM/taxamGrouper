@@ -40,6 +40,10 @@ body{
   width: max-content;
   height: 100%;
   padding: 15px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .view-mode{
@@ -89,12 +93,38 @@ input[type="file"] {
   box-shadow: inset 200px 0 0 0 var(--purple);
 }
 
+.classic-button{
+  width: max-content;
+  padding: 4px 20px;
+  background-color: var(--purple);
+  border: 2px solid var(--purple);
+  border-radius: 20px;
+  color : #fff;
+  font-weight: 700;
+  transition: ease-in 0.3s;
+}
+
+.classic-button:hover{
+  background-color: #2B3253;
+  border-radius: 3px;
+  border-radius: 5px;
+  transition: ease-out 0.3s;
+  cursor: pointer;
+}
+
 /* CARDS */
 
 .cards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards-content{
   width: 95vw;
   min-height: max-content;
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
 }
