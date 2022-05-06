@@ -25,37 +25,41 @@ var hslGenerator = (numberColors, s = 0, l = 0) => {
     return colors
 }
 
-var getCsvFile = () => {
+
+var getFileText = async (localFile) => new Promise((resolve, reject) => {
+    let fileReader = new FileReader();
+    fileReader.readAsText(localFile);
+    fileReader.onerror = (err) => reject(err);
+    fileReader.onload = () => resolve(fileReader.result.split(/\r\n|\n/).filter(n => n != ''));
+  })
+
+var getCsvFile = async () => {
 
     const getFileExtension = (file) => { return file.split('.')[file.split('.').length - 1] }
-
+  
     let file = document.getElementById('file')
-    if(file.files.length > 0){
-        let fr = new FileReader()
-        let local_file = file.files[0]
-
-        let local_file_extension = getFileExtension(local_file.name)
-        if(local_file_extension.toLowerCase() === 'csv'){
-            fr.readAsText(local_file)
-            let cards = []
-            // If we use onloadend, we need to check the readyState.
-            fr.onload = function() {
-                const file_content_lines = fr.result.split(/\r\n|\n/).filter(n => n != '')
-                // Try to return this file_content_lines to createCard
-                createCard(file_content_lines)
-            }
-
-        }else{
-            alert(`YOU SHOULD HAVE BEEN INFORMED A CSV FILE, NOT A ${local_file_extension.toUpperCase()} FILE!`)
-        }
-    }else{
-        alert('YOU HAVE TO INFORM A CSV FILE!')
+    if (file.files.length > 0) {
+      let local_file = file.files[0]
+  
+      let local_file_extension = getFileExtension(local_file.name)
+      // Check if the file is a csv file
+      if (local_file_extension.toLowerCase() === 'csv') {
+        return file_content_lines = await getFileText(local_file);
+        
+      } else {
+        alert(`YOU SHOULD HAVE BEEN INFORMED A CSV FILE, NOT A ${local_file_extension.toUpperCase()} FILE!`)
+      }
+    } else {
+      alert('YOU HAVE TO INFORM A CSV FILE!')
     }
-}
+  }
 
-var createCard = (file_content_lines) => {
+var createCard = async (file_content_lines) => {
 
-    console.log(file_content_lines)
+    var file_content_lines = await getCsvFile()
+    // return
+    console.log(typeof file_content_lines)
+    let cards = []
 
     file_content_lines.forEach(file_content_line => {
         let card = [
