@@ -29,7 +29,7 @@ var hslGenerator = (numberColors, s = 0, l = 0) => {
 var getFileText = async (localFile) => new Promise((resolve, reject) => {
     let fileReader = new FileReader();
     fileReader.readAsText(localFile);
-    fileReader.onerror = (err) => reject(err);
+    fileReader.onerror = (err) => null;
     fileReader.onload = () => resolve(fileReader.result.split(/\r\n|\n/).filter(n => n != ''));
   })
 
@@ -44,7 +44,7 @@ var getCsvFile = async () => {
       let local_file_extension = getFileExtension(local_file.name)
       // Check if the file is a csv file
       if (local_file_extension.toLowerCase() === 'csv') {
-        return file_content_lines = await getFileText(local_file);
+        return await getFileText(local_file);
         
       } else {
         alert(`YOU SHOULD HAVE BEEN INFORMED A CSV FILE, NOT A ${local_file_extension.toUpperCase()} FILE!`)
@@ -54,31 +54,54 @@ var getCsvFile = async () => {
     }
   }
 
-var createCard = async (file_content_lines) => {
+var createCard = async () => {
 
     var file_content_lines = await getCsvFile()
-    // return
-    console.log(typeof file_content_lines)
-    let cards = []
+    if (file_content_lines){
+        let cards = []
 
-    file_content_lines.forEach(file_content_line => {
-        let card = [
-            `<div class="card">`,
-                `<span class="card-header">Group</span>`,
-            `<div class="card-body">`,
-                `<ul>`,
-        ]
-        file_content_line.split(',').forEach(sample => {
-            card.push(`<li>${sample}</li>`)
-        })
-        card.push(
-            [
-                        `</ul>`,
+        const card_colors = hslGenerator(file_content_lines.length, 90, 60)
+
+        file_content_lines.forEach((file_content_line, index) => {
+            let card = [
+                `<div class="card">`,
+                    `<span class="card-header" style="background-color: ${card_colors[index]};">GRUPO ${index}</span>`,
+                `<div class="card-body" style="border-color: ${card_colors[index]}";>`,
+                    `<ul>`,
+            ]
+            file_content_line.split(',').forEach(sample => {
+                card.push(`<li>${sample}</li>`)
+            })
+            card.push(
+                [
+                            `</ul>`,
+                        `</div>`,
                     `</div>`,
-                `</div>`,
-            ].join('')
-        )
-        cards.push(card.join(''))
+                ].join('')
+            )
+            cards.push(card.join(''))
+        })
+        return cards
+    }else{
+       alert('INVALID FILE!') 
+    }
+    
+}
+
+var insertCards = async () => {
+    const cards_section = document.getElementById('cards-section')
+    
+    cards_section.innerHTML = [
+        `<h1>Grupos</h1><br/><br/>`,
+        `<div class="cards-content" id="cards-section-content"></div>`
+    ].join('')
+
+    const cards_section_content = document.getElementById('cards-section-content')
+
+    const cards = await createCard()
+
+    cards.forEach( card => {
+        cards_section_content.innerHTML += card;
     })
-    console.log(cards)
+
 }
