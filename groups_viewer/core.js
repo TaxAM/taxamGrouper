@@ -65,7 +65,7 @@ var createCard = async () => {
         file_content_lines.forEach((file_content_line, index) => {
             let card = [
                 `<div class="card">`,
-                    `<span class="card-header" style="background-color: ${card_colors[index]};">GRUPO ${index}</span>`,
+                    `<span class="card-header" style="background-color: ${card_colors[index]};">GRUPO ${index + 1}</span>`,
                 `<div class="card-body" style="border-color: ${card_colors[index]}";>`,
                     `<ul>`,
             ]
