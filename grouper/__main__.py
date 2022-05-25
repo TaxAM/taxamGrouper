@@ -23,7 +23,7 @@ algorithms = {
                 parse.add_argument,
                 '-n',
                 '--n_clusters',
-                help = 'Set the number of clusters that Kmeans will use to group samples.',
+                help = 'Set the number of clusters that Kmeans will use to group samples. Default 2.',
                 type = int,
                 action = 'store',
                 default = 2
@@ -43,7 +43,7 @@ parse.add_argument(
 parse.add_argument(
     '-on',
     '--output_name',
-    help = 'Name for the taxam grouper file.',
+    help = 'Name for the taxam grouper file. Default "TaxAM_grouper".',
     type = str,
     action = 'store',
     default = 'TaxAM_grouper'
