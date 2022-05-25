@@ -27,6 +27,24 @@ algorithms = {
                 type = int,
                 action = 'store',
                 default = 2
+            ),
+            functools.partial(
+                parse.add_argument,
+                '-ni',
+                '--n_init',
+                help = 'Number of time the k-means algorithm will be run with different centroid seeds. The final results will be the best output of n_init consecutive runs in terms of inertia. Default 10.',
+                type = int,
+                action = 'store',
+                default = 10
+            ),
+            functools.partial(
+                parse.add_argument,
+                '-mi',
+                '--max_iter',
+                help = 'Maximum number of iterations of the k-means algorithm for a single run.Default 300',
+                type = int,
+                action = 'store',
+                default = 300
             )
         ]
     }
@@ -84,7 +102,6 @@ matrix = pd.read_csv(
     delimiter = '\t',
     index_col= 'TaxAM'
 )
-
 transposed_matrix = matrix.transpose()
 groups = algorithms[op_algorithm]['function'](transposed_matrix, args)
 
