@@ -32,7 +32,7 @@ algorithms = {
                 parse.add_argument,
                 '-ni',
                 '--n_init',
-                help = 'Number of time the k-means algorithm will be run with different centroid seeds. The final results will be the best output of n_init consecutive runs in terms of inertia. Default 10.',
+                help = 'Number of times that k-means algorithm will be run with different centroid seeds. The final results will be the best output of n_init consecutive runs in terms of inertia. Default 10.',
                 type = int,
                 action = 'store',
                 default = 10
